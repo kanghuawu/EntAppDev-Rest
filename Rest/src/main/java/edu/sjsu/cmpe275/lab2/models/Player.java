@@ -10,16 +10,16 @@ import static edu.sjsu.cmpe275.lab2.GlobalVar.*;
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = KEY_ID, updatable = false, nullable = false)
+    @Column(name = KEY_ID)
     private long id;
 
-    @Column(name = KEY_FIRSTNAME, nullable = false)
+    @Column(name = KEY_FIRSTNAME)
     private String firstname;
 
-    @Column(name = KEY_LASTNAME, nullable = false)
+    @Column(name = KEY_LASTNAME)
     private String lastname;
 
-    @Column(name = KEY_EMAIL, nullable = false)
+    @Column(name = KEY_EMAIL)
     private String email;
 
     @Column(name = KEY_DESCRIPTION)

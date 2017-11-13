@@ -9,10 +9,10 @@ import static edu.sjsu.cmpe275.lab2.GlobalVar.*;
 public class Sponsor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = KEY_ID, updatable = false, nullable = false)
+    @Column(name = KEY_ID)
     private long id;
 
-    @Column(name = KEY_NAME, updatable = false, nullable = false)
+    @Column(name = KEY_NAME)
     private String name;
 
     @Column(name = KEY_DESCRIPTION)

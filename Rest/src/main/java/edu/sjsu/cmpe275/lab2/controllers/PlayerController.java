@@ -31,7 +31,7 @@ public class PlayerController {
 
         Player player = playerService.create(reqParam);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(player, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

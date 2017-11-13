@@ -19,11 +19,11 @@ public class Address {
     @Column(name = KEY_ZIP)
     private String zip;
 
+    public Address() {}
+
     public String getStreet() {
         return street;
     }
-
-    public Address() {}
 
     public void setStreet(String street) {
         this.street = street;

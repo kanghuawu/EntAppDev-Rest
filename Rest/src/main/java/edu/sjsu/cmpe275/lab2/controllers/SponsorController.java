@@ -25,7 +25,7 @@ public class SponsorController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Sponsor> get(@PathVariable("id") Long id) {
 
 
