@@ -41,9 +41,12 @@ public class PlayerServiceImp implements PlayerService {
     @Transactional(propagation = Propagation.REQUIRED)
     public Player update(Long id, Map<String, String> reqParam) {
         Player player = playerRepository.findOne(id);
-        Address address = player.getAddress();
-        updatePlayer(player, address, reqParam);
-        return playerRepository.save(player);
+        if (player != null) {
+            Address address = player.getAddress();
+            updatePlayer(player, address, reqParam);
+            return playerRepository.save(player);
+        }
+        return null;
     }
 
     @Override
@@ -51,6 +54,7 @@ public class PlayerServiceImp implements PlayerService {
     public Player delete(Long id) {
         Player player = playerRepository.findOne(id);
         if (player != null) {
+            player.getOpponents().size();
             playerRepository.delete(id);
         }
         return player;

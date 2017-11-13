@@ -1,0 +1,469 @@
+{
+	"info": {
+		"name": "CMPE275 - Lab 2",
+		"_postman_id": "d923f0ae-73ac-84fc-12b6-759df10957a6",
+		"description": "Automation test cases for cmpe275 lab 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create - Get - Update - Delete Player",
+			"description": "",
+			"item": [
+				{
+					"name": "Create player 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Validate first name, last name, email\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.firstname).to.eql(\"Anita\");",
+									"    pm.expect(jsonData.lastname).to.eql(\"Liu\");",
+									"    pm.expect(jsonData.email).to.eql(\"anita@cute.email.com\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/player?firstname=Anita&lastname=Liu&email=anita@cute.email.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"player"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "Anita",
+									"equals": true
+								},
+								{
+									"key": "lastname",
+									"value": "Liu",
+									"equals": true
+								},
+								{
+									"key": "email",
+									"value": "anita@cute.email.com",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get player",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Validate first name, last name, email\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.firstname).to.eql(\"Anita\");",
+									"    pm.expect(jsonData.lastname).to.eql(\"Liu\");",
+									"    pm.expect(jsonData.email).to.eql(\"anita@cute.email.com\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/player/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"player",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update player",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Validate first name, last name, email\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.firstname).to.eql(\"aaa\");",
+									"    pm.expect(jsonData.lastname).to.eql(\"Liu\");",
+									"    pm.expect(jsonData.email).to.eql(\"anita@cute.email.com\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/player/1?firstname=aaa&lastname=Liu&email=anita@cute.email.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"player",
+								"1"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "aaa",
+									"equals": true
+								},
+								{
+									"key": "lastname",
+									"value": "Liu",
+									"equals": true
+								},
+								{
+									"key": "email",
+									"value": "anita@cute.email.com",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get player after renaming",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Validate first name, last name, email\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.firstname).to.eql(\"aaa\");",
+									"    pm.expect(jsonData.lastname).to.eql(\"Liu\");",
+									"    pm.expect(jsonData.email).to.eql(\"anita@cute.email.com\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/player/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"player",
+								"1"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update not existing player",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/player/999?firstname=aaa&lastname=Liu&email=anita@cute.email.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"player",
+								"999"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "aaa",
+									"equals": true
+								},
+								{
+									"key": "lastname",
+									"value": "Liu",
+									"equals": true
+								},
+								{
+									"key": "email",
+									"value": "anita@cute.email.com",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update player without required field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/player/1?firstname=bbb&lastname=Liu",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"player",
+								"1"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "bbb",
+									"equals": true
+								},
+								{
+									"key": "lastname",
+									"value": "Liu",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create player 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Validate first name, last name, email\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.firstname).to.eql(\"zzz\");",
+									"    pm.expect(jsonData.lastname).to.eql(\"zzz\");",
+									"    pm.expect(jsonData.email).to.eql(\"zzz@email.com\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/player?firstname=zzz&lastname=zzz&email=zzz@email.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"player"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "zzz",
+									"equals": true
+								},
+								{
+									"key": "lastname",
+									"value": "zzz",
+									"equals": true
+								},
+								{
+									"key": "email",
+									"value": "zzz@email.com",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete not existing player",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/player/999",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"player",
+								"999"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete player 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/player/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"player",
+								"2"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get already deleted player",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/player/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"player",
+								"2"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

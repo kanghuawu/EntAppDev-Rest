@@ -50,13 +50,13 @@ public class PlayerController {
     public ResponseEntity<Player> update(@PathVariable("id") Long id, @RequestParam Map<String,String> reqParam) {
 
         if (!reqParam.containsKey(KEY_EMAIL)) {
-            new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         Player player = playerService.update(id, reqParam);
 
         if (player == null) {
-            new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(player, HttpStatus.OK);
