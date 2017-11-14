@@ -1,6 +1,7 @@
 package edu.sjsu.cmpe275.lab2.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 import static edu.sjsu.cmpe275.lab2.GlobalVar.*;
 
@@ -19,9 +20,10 @@ public class Sponsor {
     private String description;
 
     @Embedded
-    private Address address;
+    private Address address = new Address();
 
-    public Sponsor() {}
+    public Sponsor() {
+    }
 
     public long getId() {
         return id;

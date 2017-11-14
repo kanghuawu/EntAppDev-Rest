@@ -6,6 +6,7 @@ public class GlobalVar {
     public static final String KEY_LASTNAME = "lastname";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_SPONSOR = "sponsor";
 
 
     public static final String KEY_STREET = "street";

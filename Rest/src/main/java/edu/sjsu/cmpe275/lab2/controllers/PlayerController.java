@@ -23,42 +23,37 @@ public class PlayerController {
     private PlayerService playerService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ResponseEntity<Player> create(@RequestParam Map<String,String> reqParam) {
-
-        if (!isParamValid(reqParam)) {
+    public ResponseEntity<Player> create(@RequestParam Map<String, String> reqParam) {
+        if (!reqParam.containsKey(KEY_FIRSTNAME) ||
+                !reqParam.containsKey(KEY_LASTNAME) ||
+                !reqParam.containsKey(KEY_EMAIL)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
         Player player = playerService.create(reqParam);
-
+        if (player == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(player, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Player> get(@PathVariable("id") Long id) {
-
         Player player = playerService.findOne(id);
-
         if (player == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
         return new ResponseEntity<>(player, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Player> update(@PathVariable("id") Long id, @RequestParam Map<String,String> reqParam) {
-
+    public ResponseEntity<Player> update(@PathVariable("id") Long id, @RequestParam Map<String, String> reqParam) {
         if (!reqParam.containsKey(KEY_EMAIL)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
         Player player = playerService.update(id, reqParam);
-
         if (player == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
         return new ResponseEntity<>(player, HttpStatus.OK);
     }
 
@@ -66,14 +61,8 @@ public class PlayerController {
     public ResponseEntity<Player> delete(@PathVariable("id") Long id) {
         Player player = playerService.delete(id);
         if (player == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(player, HttpStatus.OK);
-    }
-
-    private boolean isParamValid(Map<String,String> reqParam) {
-        return reqParam.containsKey(KEY_FIRSTNAME) &&
-                reqParam.containsKey(KEY_LASTNAME) &&
-                reqParam.containsKey(KEY_EMAIL);
     }
 }

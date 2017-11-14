@@ -1,6 +1,7 @@
 package edu.sjsu.cmpe275.lab2.models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 import static edu.sjsu.cmpe275.lab2.GlobalVar.*;
 
@@ -19,7 +20,8 @@ public class Address {
     @Column(name = KEY_ZIP)
     private String zip;
 
-    public Address() {}
+    public Address() {
+    }
 
     public String getStreet() {
         return street;

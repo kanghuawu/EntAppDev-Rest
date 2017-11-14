@@ -1,17 +1,17 @@
 {
 	"info": {
 		"name": "CMPE275 - Lab 2",
-		"_postman_id": "d923f0ae-73ac-84fc-12b6-759df10957a6",
+		"_postman_id": "5a6194fb-e193-3d54-0a8b-2590eb123bf9",
 		"description": "Automation test cases for cmpe275 lab 2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Create - Get - Update - Delete Player",
+			"name": "Sponsor",
 			"description": "",
 			"item": [
 				{
-					"name": "Create player 1",
+					"name": "Create sponsor",
 					"event": [
 						{
 							"listen": "test",
@@ -27,7 +27,8 @@
 									"    pm.expect(jsonData.firstname).to.eql(\"Anita\");",
 									"    pm.expect(jsonData.lastname).to.eql(\"Liu\");",
 									"    pm.expect(jsonData.email).to.eql(\"anita@cute.email.com\");",
-									"});"
+									"});",
+									""
 								]
 							}
 						}
@@ -37,7 +38,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "localhost:8080/player?firstname=Anita&lastname=Liu&email=anita@cute.email.com",
+							"raw": "localhost:8080/player?firstname=KH&lastname=Wu&email=khwu@khwu.com&street=SJSU&city=San Jose&sponsor=1",
 							"host": [
 								"localhost"
 							],
@@ -48,22 +49,430 @@
 							"query": [
 								{
 									"key": "firstname",
-									"value": "Anita",
+									"value": "KH",
 									"equals": true
 								},
 								{
 									"key": "lastname",
-									"value": "Liu",
+									"value": "Wu",
 									"equals": true
 								},
 								{
 									"key": "email",
-									"value": "anita@cute.email.com",
+									"value": "khwu@khwu.com",
+									"equals": true
+								},
+								{
+									"key": "street",
+									"value": "SJSU",
+									"equals": true
+								},
+								{
+									"key": "city",
+									"value": "San Jose",
+									"equals": true
+								},
+								{
+									"key": "sponsor",
+									"value": "1",
 									"equals": true
 								}
 							]
-						},
-						"description": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create player copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Validate first name, last name, email\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.firstname).to.eql(\"Anita\");",
+									"    pm.expect(jsonData.lastname).to.eql(\"Liu\");",
+									"    pm.expect(jsonData.email).to.eql(\"anita@cute.email.com\");",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/player?firstname=KH&lastname=Wu&email=khwu@khwu.com&street=SJSU&city=San Jose&sponsor=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"player"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "KH",
+									"equals": true
+								},
+								{
+									"key": "lastname",
+									"value": "Wu",
+									"equals": true
+								},
+								{
+									"key": "email",
+									"value": "khwu@khwu.com",
+									"equals": true
+								},
+								{
+									"key": "street",
+									"value": "SJSU",
+									"equals": true
+								},
+								{
+									"key": "city",
+									"value": "San Jose",
+									"equals": true
+								},
+								{
+									"key": "sponsor",
+									"value": "1",
+									"equals": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Player",
+			"item": [
+				{
+					"name": "Create Player with invalid param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}:{{port}}/player?firstname=KH&lastname=Wu",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"player"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "KH",
+									"equals": true
+								},
+								{
+									"key": "lastname",
+									"value": "Wu",
+									"equals": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create player with invalid sponsor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}:{{port}}/player?firstname=KH&lastname=Wu&email=khwu@khwu.com&street=SJSU&city=San Jose&sponsor=9000",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"player"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "KH",
+									"equals": true
+								},
+								{
+									"key": "lastname",
+									"value": "Wu",
+									"equals": true
+								},
+								{
+									"key": "email",
+									"value": "khwu@khwu.com",
+									"equals": true
+								},
+								{
+									"key": "street",
+									"value": "SJSU",
+									"equals": true
+								},
+								{
+									"key": "city",
+									"value": "San Jose",
+									"equals": true
+								},
+								{
+									"key": "sponsor",
+									"value": "9000",
+									"equals": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create player 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Validate first name, last name, email\", function () {",
+									"    pm.expect(jsonData.firstname).to.eql(\"KH\");",
+									"    pm.expect(jsonData.lastname).to.eql(\"Wu\");",
+									"    pm.expect(jsonData.email).to.eql(\"khwu@khwu.com\");",
+									"    pm.expect(jsonData.address.street).to.eql(\"SJSU\");",
+									"    pm.expect(jsonData.address.city).to.eql(\"San Jose\");",
+									"});",
+									"",
+									"pm.globals.set(\"player_id_1\", jsonData.id);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}:{{port}}/player?firstname=KH&lastname=Wu&email=khwu@khwu.com&street=SJSU&city=San Jose",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"player"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "KH",
+									"equals": true
+								},
+								{
+									"key": "lastname",
+									"value": "Wu",
+									"equals": true
+								},
+								{
+									"key": "email",
+									"value": "khwu@khwu.com",
+									"equals": true
+								},
+								{
+									"key": "street",
+									"value": "SJSU",
+									"equals": true
+								},
+								{
+									"key": "city",
+									"value": "San Jose",
+									"equals": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create player 1 again",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}:{{port}}/player?firstname=KH&lastname=Wu&email=khwu@khwu.com&street=SJSU&city=San Jose",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"player"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "KH",
+									"equals": true
+								},
+								{
+									"key": "lastname",
+									"value": "Wu",
+									"equals": true
+								},
+								{
+									"key": "email",
+									"value": "khwu@khwu.com",
+									"equals": true
+								},
+								{
+									"key": "street",
+									"value": "SJSU",
+									"equals": true
+								},
+								{
+									"key": "city",
+									"value": "San Jose",
+									"equals": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create player 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Validate first name, last name, email\", function () {",
+									"    pm.expect(jsonData.firstname).to.eql(\"KH\");",
+									"    pm.expect(jsonData.lastname).to.eql(\"Wu\");",
+									"    pm.expect(jsonData.email).to.eql(\"wuwu@wuwu.com\");",
+									"    pm.expect(jsonData.address.street).to.eql(\"SJSU\");",
+									"    pm.expect(jsonData.address.city).to.eql(\"San Jose\");",
+									"});",
+									"",
+									"pm.globals.set(\"player_id_2\", jsonData.id);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}:{{port}}/player?firstname=KH&lastname=Wu&email=wuwu@wuwu.com&street=SJSU&city=San Jose",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"player"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "KH",
+									"equals": true
+								},
+								{
+									"key": "lastname",
+									"value": "Wu",
+									"equals": true
+								},
+								{
+									"key": "email",
+									"value": "wuwu@wuwu.com",
+									"equals": true
+								},
+								{
+									"key": "street",
+									"value": "SJSU",
+									"equals": true
+								},
+								{
+									"key": "city",
+									"value": "San Jose",
+									"equals": true
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -79,11 +488,13 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.test(\"Validate first name, last name, email\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.firstname).to.eql(\"Anita\");",
-									"    pm.expect(jsonData.lastname).to.eql(\"Liu\");",
-									"    pm.expect(jsonData.email).to.eql(\"anita@cute.email.com\");",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Check player's data\", function () {",
+									"    pm.expect(jsonData.firstname).to.eql(\"KH\");",
+									"    pm.expect(jsonData.lastname).to.eql(\"Wu\");",
+									"    pm.expect(jsonData.email).to.eql(\"khwu@khwu.com\");",
+									"    pm.expect(jsonData.address.street).to.eql(\"SJSU\");",
+									"    pm.expect(jsonData.address.city).to.eql(\"San Jose\");",
 									"});"
 								]
 							}
@@ -94,17 +505,50 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "localhost:8080/player/1",
+							"raw": "{{url}}:{{port}}/player/{{player_id_1}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"player",
+								"{{player_id_1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get non existing player",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/player/9000",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"player",
-								"1"
+								"9000"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -120,11 +564,13 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.test(\"Validate first name, last name, email\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.firstname).to.eql(\"aaa\");",
-									"    pm.expect(jsonData.lastname).to.eql(\"Liu\");",
-									"    pm.expect(jsonData.email).to.eql(\"anita@cute.email.com\");",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Update user data\", function () {",
+									"    pm.expect(jsonData.firstname).to.eql(\"HK\");",
+									"    pm.expect(jsonData.lastname).to.eql(\"Uw\");",
+									"    pm.expect(jsonData.email).to.eql(\"test@test.com\");",
+									"    pm.expect(jsonData.address.street).to.eql(\"SFO\");",
+									"    pm.expect(jsonData.address.city).to.eql(\"San Jose\");",
 									"});"
 								]
 							}
@@ -135,34 +581,38 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "localhost:8080/player/1?firstname=aaa&lastname=Liu&email=anita@cute.email.com",
+							"raw": "{{url}}:{{port}}/player/{{player_id_1}}?firstname=HK&lastname=Uw&email=test@test.com&street=SFO",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"player",
-								"1"
+								"{{player_id_1}}"
 							],
 							"query": [
 								{
 									"key": "firstname",
-									"value": "aaa",
+									"value": "HK",
 									"equals": true
 								},
 								{
 									"key": "lastname",
-									"value": "Liu",
+									"value": "Uw",
 									"equals": true
 								},
 								{
 									"key": "email",
-									"value": "anita@cute.email.com",
+									"value": "test@test.com",
+									"equals": true
+								},
+								{
+									"key": "street",
+									"value": "SFO",
 									"equals": true
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -178,11 +628,13 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.test(\"Validate first name, last name, email\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.firstname).to.eql(\"aaa\");",
-									"    pm.expect(jsonData.lastname).to.eql(\"Liu\");",
-									"    pm.expect(jsonData.email).to.eql(\"anita@cute.email.com\");",
+									"var jsonData = pm.response.json();",
+									"pm.test(\"Update user data\", function () {",
+									"    pm.expect(jsonData.firstname).to.eql(\"HK\");",
+									"    pm.expect(jsonData.lastname).to.eql(\"Uw\");",
+									"    pm.expect(jsonData.email).to.eql(\"test@test.com\");",
+									"    pm.expect(jsonData.address.street).to.eql(\"SFO\");",
+									"    pm.expect(jsonData.address.city).to.eql(\"San Jose\");",
 									"});"
 								]
 							}
@@ -193,17 +645,16 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "localhost:8080/player/1",
+							"raw": "{{url}}:{{port}}/player/{{player_id_1}}",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"player",
-								"1"
+								"{{player_id_1}}"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -227,14 +678,14 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "localhost:8080/player/999?firstname=aaa&lastname=Liu&email=anita@cute.email.com",
+							"raw": "{{url}}:{{port}}/player/9999?firstname=aaa&email=test@test.com",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"player",
-								"999"
+								"9999"
 							],
 							"query": [
 								{
@@ -243,18 +694,12 @@
 									"equals": true
 								},
 								{
-									"key": "lastname",
-									"value": "Liu",
-									"equals": true
-								},
-								{
 									"key": "email",
-									"value": "anita@cute.email.com",
+									"value": "test@test.com",
 									"equals": true
 								}
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -278,14 +723,14 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "localhost:8080/player/1?firstname=bbb&lastname=Liu",
+							"raw": "{{url}}:{{port}}/player/{{player_id_1}}?firstname=bbb&lastname=ccc",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"player",
-								"1"
+								"{{player_id_1}}"
 							],
 							"query": [
 								{
@@ -295,69 +740,11 @@
 								},
 								{
 									"key": "lastname",
-									"value": "Liu",
+									"value": "ccc",
 									"equals": true
 								}
 							]
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "Create player 2",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Validate first name, last name, email\", function () {",
-									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.firstname).to.eql(\"zzz\");",
-									"    pm.expect(jsonData.lastname).to.eql(\"zzz\");",
-									"    pm.expect(jsonData.email).to.eql(\"zzz@email.com\");",
-									"});"
-								]
-							}
 						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "localhost:8080/player?firstname=zzz&lastname=zzz&email=zzz@email.com",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"player"
-							],
-							"query": [
-								{
-									"key": "firstname",
-									"value": "zzz",
-									"equals": true
-								},
-								{
-									"key": "lastname",
-									"value": "zzz",
-									"equals": true
-								},
-								{
-									"key": "email",
-									"value": "zzz@email.com",
-									"equals": true
-								}
-							]
-						},
-						"description": ""
 					},
 					"response": []
 				},
@@ -369,8 +756,8 @@
 							"script": {
 								"type": "text/javascript",
 								"exec": [
-									"pm.test(\"Status code is 400\", function () {",
-									"    pm.response.to.have.status(400);",
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
 									"});"
 								]
 							}
@@ -381,17 +768,52 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "localhost:8080/player/999",
+							"raw": "{{url}}:{{port}}/player/9999",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"player",
-								"999"
+								"9999"
 							]
-						},
-						"description": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete player 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.globals.unset(\"player_id_1\");",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{url}}:{{port}}/player/{{player_id_1}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"player",
+								"{{player_id_1}}"
+							]
+						}
 					},
 					"response": []
 				},
@@ -405,7 +827,9 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
-									"});"
+									"});",
+									"",
+									"pm.globals.unset(\"player_id_2\");"
 								]
 							}
 						}
@@ -415,17 +839,16 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "localhost:8080/player/2",
+							"raw": "{{url}}:{{port}}/player/{{player_id_2}}",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"player",
-								"2"
+								"{{player_id_2}}"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				},
@@ -449,17 +872,16 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "localhost:8080/player/2",
+							"raw": "{{url}}:{{port}}/player/{{player_id}}",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "8080",
+							"port": "{{port}}",
 							"path": [
 								"player",
-								"2"
+								"{{player_id}}"
 							]
-						},
-						"description": ""
+						}
 					},
 					"response": []
 				}

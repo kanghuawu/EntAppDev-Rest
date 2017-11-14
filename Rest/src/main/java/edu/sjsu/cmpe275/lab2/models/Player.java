@@ -1,13 +1,17 @@
 package edu.sjsu.cmpe275.lab2.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import static edu.sjsu.cmpe275.lab2.GlobalVar.*;
 
 @Entity
 @Table(name = "PLAYER")
-public class Player {
+public class Player implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = KEY_ID)
@@ -19,28 +23,31 @@ public class Player {
     @Column(name = KEY_LASTNAME)
     private String lastname;
 
-    @Column(name = KEY_EMAIL)
+    @Column(name = KEY_EMAIL, unique=true)
     private String email;
 
     @Column(name = KEY_DESCRIPTION)
     private String description;
 
     @Embedded
-    private Address address;
+    private Address address = new Address();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "SPONSOR_ID")
     private Sponsor sponsor;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinTable(
             name = "OPPONENT",
-            joinColumns = { @JoinColumn(name = "PLAYER_ID", referencedColumnName = "ID") },
-            inverseJoinColumns = { @JoinColumn(name = "OPPONENT_ID", referencedColumnName = "ID", unique = true) }
+            joinColumns = {@JoinColumn(name = "PLAYER_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "OPPONENT_ID", referencedColumnName = "ID")},
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"PLAYER_ID", "OPPONENT_ID"})}
     )
-    private List<Player> opponents;
+    @JsonIgnoreProperties("opponents")
+    private List<Player> opponents = new ArrayList<>();
 
-    public Player() {}
+    public Player() {
+    }
 
     public long getId() {
         return id;
@@ -104,5 +111,21 @@ public class Player {
 
     public void setOpponents(List<Player> opponents) {
         this.opponents = opponents;
+    }
+
+    public boolean hasOpponent(Player player) {
+        return opponents.contains(player);
+    }
+
+    public void addOpponent(Player player) {
+        if (!hasOpponent(player)) {
+            opponents.add(player);
+        }
+    }
+
+    public void removeOpponent(Player player) {
+        if (hasOpponent(player)) {
+            opponents.remove(player);
+        }
     }
 }

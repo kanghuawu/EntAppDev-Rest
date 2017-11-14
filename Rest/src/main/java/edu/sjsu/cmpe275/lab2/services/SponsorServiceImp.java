@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Map;
 
 import static edu.sjsu.cmpe275.lab2.GlobalVar.*;
-import static edu.sjsu.cmpe275.lab2.GlobalVar.KEY_ZIP;
 
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -33,9 +32,9 @@ public class SponsorServiceImp implements SponsorService {
     @Transactional(propagation = Propagation.REQUIRED)
     public Sponsor create(Map<String, String> reqParam) {
         Sponsor sponsor = new Sponsor();
-        Address address = new Address();
+        Address address = sponsor.getAddress();
         updateSponsor(sponsor, address, reqParam);
-        return sponsor;
+        return sponsorRepository.save(sponsor);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class SponsorServiceImp implements SponsorService {
         Sponsor sponsor = sponsorRepository.findOne(id);
         Address address = sponsor.getAddress();
         updateSponsor(sponsor, address, reqParam);
-        return sponsor;
+        return sponsorRepository.save(sponsor);
     }
 
     @Override

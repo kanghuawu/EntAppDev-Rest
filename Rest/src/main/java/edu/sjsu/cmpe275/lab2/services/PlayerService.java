@@ -6,8 +6,10 @@ import java.util.Map;
 
 public interface PlayerService {
     public Player findOne(Long id);
-    public Player create(Map<String, String> reqParam);
-    public Player update(Long id, Map<String, String> reqParam);
-    public Player delete(Long id);
 
+    public Player create(Map<String, String> reqParam);
+
+    public Player update(Long id, Map<String, String> reqParam);
+
+    public Player delete(Long id);
 }
