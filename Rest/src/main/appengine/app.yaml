@@ -1,0 +1,8 @@
+runtime: java
+env: flex
+manual_scaling:
+  instances: 5
+
+network:
+  forwarded_ports:
+    - 9000:8080
