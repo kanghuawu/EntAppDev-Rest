@@ -24,6 +24,9 @@ public class OpponentController {
 
     @RequestMapping(value = "/{id1}/{id2}", method = RequestMethod.PUT)
     public ResponseEntity<Player> setUpMatch(@PathVariable("id1") Long id1, @PathVariable("id2") Long id2) {
+        if (id1.equals(id2)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         Player player = opponentService.setupMatch(id1, id2);
         if (player == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

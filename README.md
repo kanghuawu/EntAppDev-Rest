@@ -5,7 +5,7 @@ Grant privilege to database user account
 2. Create database cmpe275
 3. Grant privilege to user account
 ````
-> grant all on cmpe275.* to 'cmpe275'@'%'
+> GRANT ALL ON cmpe275.* TO 'cmpe275'@'%' IDENTIFIED BY 'password';
 ```` 
 
 Initialize lazy fetching session

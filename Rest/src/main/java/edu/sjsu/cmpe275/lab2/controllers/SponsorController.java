@@ -43,7 +43,7 @@ public class SponsorController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Sponsor> update(@PathVariable("id") Long id, @RequestParam Map<String, String> reqParam) {
-        if (reqParam.containsKey(KEY_NAME)) {
+        if (!reqParam.containsKey(KEY_NAME)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         Sponsor sponsor = sponsorService.update(id, reqParam);

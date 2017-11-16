@@ -41,6 +41,9 @@ public class SponsorServiceImp implements SponsorService {
     @Transactional(propagation = Propagation.REQUIRED)
     public Sponsor update(Long id, Map<String, String> reqParam) {
         Sponsor sponsor = sponsorRepository.findOne(id);
+        if (sponsor == null) {
+            return null;
+        }
         Address address = sponsor.getAddress();
         updateSponsor(sponsor, address, reqParam);
         return sponsorRepository.save(sponsor);
