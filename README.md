@@ -8,5 +8,7 @@ Grant privilege to database user account
 > GRANT ALL ON cmpe275.* TO 'cmpe275'@'%' IDENTIFIED BY 'password';
 ```` 
 
-Initialize lazy fetching session
-* https://stackoverflow.com/questions/15359306/how-to-load-lazy-fetched-items-from-hibernate-jpa-in-my-controller
+Google Cloud Platform
+
+* Compute Engine IP: 35.203.179.183
+* MySQL IP: 35.199.179.169
