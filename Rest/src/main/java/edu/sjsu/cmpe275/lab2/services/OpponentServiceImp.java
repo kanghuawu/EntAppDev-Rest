@@ -7,6 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * This is the implementation of OpponentService. Every method is transactional.
+ *
+ * @author Kang-Hua Wu
+ * @version 1.0
+ */
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class OpponentServiceImp implements OpponentService {
@@ -14,6 +20,13 @@ public class OpponentServiceImp implements OpponentService {
     @Autowired
     PlayerRepository playerRepository;
 
+    /**
+     * This method is for setting up a match between two players e.g. setting up opponent relationship.
+     *
+     * @param id1 The id of a player for setting up match.
+     * @param id2 The id of another player for setting up match.
+     * @return Returns the id1 player after set successful. Returns null if either player is not found.
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Player setupMatch(long id1, long id2) {
@@ -28,6 +41,12 @@ public class OpponentServiceImp implements OpponentService {
         return playerRepository.save(player1);
     }
 
+    /**
+     * This method is for deleting a match between two players e.g. deleting opponent relationship.
+     *
+     * @param id1 The id of a player for deleting a match.
+     * @param id2 The id of another player for deleting a match.
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Player deleteMatch(long id1, long id2) {

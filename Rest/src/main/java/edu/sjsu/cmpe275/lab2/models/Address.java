@@ -5,6 +5,13 @@ import javax.persistence.Embeddable;
 
 import static edu.sjsu.cmpe275.lab2.GlobalVar.*;
 
+/**
+ * The Address is not an independently exist as a table in database. It is an embedded
+ * attribute in player and sponsor table.
+ *
+ * @author Kang-Hua Wu
+ * @version 1.0
+ */
 @Embeddable
 public class Address {
 

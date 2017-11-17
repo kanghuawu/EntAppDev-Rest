@@ -14,6 +14,12 @@ import java.util.Map;
 
 import static edu.sjsu.cmpe275.lab2.GlobalVar.*;
 
+/**
+ * This is an implementation for SponsorService.
+ *
+ * @author Yuntian Shen
+ * @version 1.0
+ */
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class SponsorServiceImp implements SponsorService {
@@ -23,11 +29,23 @@ public class SponsorServiceImp implements SponsorService {
     @Autowired
     private SponsorRepository sponsorRepository;
 
+    /**
+     * This method is for finding sponsor given an id.
+     *
+     * @param id The id of which player is finding.
+     * @return Returns the player if is found. Otherwise, returns null.
+     */
     @Override
     public Sponsor findOne(Long id) {
         return sponsorRepository.findOne(id);
     }
 
+    /**
+     * This method is for creating a new sponsor.
+     *
+     * @param reqParam HashMap of attribute to be updated to newly created sponsor.
+     * @return Returns a newly created sponsor.
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Sponsor create(Map<String, String> reqParam) {
@@ -37,6 +55,13 @@ public class SponsorServiceImp implements SponsorService {
         return sponsorRepository.save(sponsor);
     }
 
+    /**
+     * This method is for updating a sponsor.
+     *
+     * @param id The id of the sponsor to be updated.
+     * @param reqParam HashMap of attributes to be updated to the sponsor.
+     * @return Returns updated sponsor object if successful. Otherwise, returns null if the sponsor is not found.
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Sponsor update(Long id, Map<String, String> reqParam) {
@@ -49,6 +74,12 @@ public class SponsorServiceImp implements SponsorService {
         return sponsorRepository.save(sponsor);
     }
 
+    /**
+     * This method is for deleting a sponsor given an id.
+     *
+     * @param id The id of which sponsor is being deleted.
+     * @return Returns the sponsor being deleted if successful. Otherwise, returns null if sponsor is not found.
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Sponsor delete(Long id) {
@@ -59,6 +90,13 @@ public class SponsorServiceImp implements SponsorService {
         return sponsor;
     }
 
+    /**
+     * Helper method for updating sponsor's attributes.
+     *
+     * @param sponsor Sponsor Object.
+     * @param address Address Object.
+     * @param reqParam HashMap of attributes to be updated to sponsor or address.
+     */
     private void updateSponsor(Sponsor sponsor, Address address, Map<String, String> reqParam) {
         for (String key : reqParam.keySet()) {
             String param = reqParam.get(key);

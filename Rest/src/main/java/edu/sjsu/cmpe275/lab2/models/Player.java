@@ -9,6 +9,12 @@ import java.util.List;
 
 import static edu.sjsu.cmpe275.lab2.GlobalVar.*;
 
+/**
+ * This class is a player entity to stored in database.
+ *
+ * @author Chenhua Zhu
+ * @version
+ */
 @Entity
 @Table(name = "PLAYER")
 public class Player implements Serializable {

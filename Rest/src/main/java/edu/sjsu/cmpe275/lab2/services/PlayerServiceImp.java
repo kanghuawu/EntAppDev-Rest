@@ -16,6 +16,12 @@ import java.util.Map;
 
 import static edu.sjsu.cmpe275.lab2.GlobalVar.*;
 
+/**
+ * This is an implementation for PlayerService.
+ *
+ * @author Chenhua Zhu
+ * @version 1.0
+ */
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class PlayerServiceImp implements PlayerService {
@@ -26,11 +32,23 @@ public class PlayerServiceImp implements PlayerService {
     @Autowired
     private SponsorRepository sponsorRepository;
 
+    /**
+     * This method is for finding player given an id.
+     *
+     * @param id The id of the player to be searched for.
+     * @return Returns the player if found. Otherwise, return null.
+     */
     @Override
     public Player findOne(Long id) {
         return playerRepository.findOne(id);
     }
 
+    /**
+     * This method is for creating player given HashMap of parameters.
+     *
+     * @param reqParam The attributes to be attached to the newly created player.
+     * @return Returns a player if successful. Otherwise, returns null if email has been used or sponsor is not found.
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Player create(Map<String, String> reqParam) {
@@ -51,6 +69,14 @@ public class PlayerServiceImp implements PlayerService {
         return playerRepository.save(player);
     }
 
+    /**
+     * This method is for updating a player.
+     *
+     * @param id The id of which player is being updated.
+     * @param reqParam The attributes in HashMap to be updated.
+     * @return Returns updated player if successful. Otherwise, returns null if player is not found or sponsor
+     * is not found.
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Player update(Long id, Map<String, String> reqParam) {
@@ -72,6 +98,12 @@ public class PlayerServiceImp implements PlayerService {
 
     }
 
+    /**
+     * This method is for deleting a player given an id.
+     *
+     * @param id The id of which player is being deleted.
+     * @return Returns the deleted player if successful. Otherwise returns null if the player is not found.
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Player delete(Long id) {
@@ -86,6 +118,14 @@ public class PlayerServiceImp implements PlayerService {
         return player;
     }
 
+    /**
+     * The helper method for update player.
+     *
+     * @param player Player Object.
+     * @param address Address Object.
+     * @param sponsor Sponsor Object.
+     * @param reqParam HashMap of attributes going to be updated to player, address, or sponsor.
+     */
     private void updatePlayer(Player player, Address address, Sponsor sponsor, Map<String, String> reqParam) {
         for (String key : reqParam.keySet()) {
             String param = reqParam.get(key);

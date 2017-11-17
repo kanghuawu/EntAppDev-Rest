@@ -5,6 +5,12 @@ import java.io.Serializable;
 
 import static edu.sjsu.cmpe275.lab2.GlobalVar.*;
 
+/**
+ * This class is a sponsor entity to stored in database.
+ *
+ * @author Yuntian Shen
+ * @version 1.0
+ */
 @Entity
 @Table(name = "SPONSOR")
 public class Sponsor {
