@@ -6,7 +6,7 @@ docker-build:
 	docker images
 
 docker-run:
-	docker run -td -p 8080:8080 --name appkanghuawu368 app
+	docker run -td -p 80:8080 --name appkanghuawu368 app
 	docker ps
 
 docker-stop:
@@ -23,5 +23,5 @@ docker-stop-recreate:
 	mvn clean package
 	docker build -t app .
 	docker images
-	docker run -td -p 8080:8080 --name appkanghuawu368 app
+	docker run -td -p 80:8080 --name appkanghuawu368 app
 	docker ps
