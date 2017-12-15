@@ -36,6 +36,7 @@ public class SponsorServiceImp implements SponsorService {
      * @return Returns the player if is found. Otherwise, returns null.
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Sponsor findOne(Long id) {
         return sponsorRepository.findOne(id);
     }

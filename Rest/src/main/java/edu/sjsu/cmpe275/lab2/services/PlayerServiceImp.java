@@ -39,6 +39,7 @@ public class PlayerServiceImp implements PlayerService {
      * @return Returns the player if found. Otherwise, return null.
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Player findOne(Long id) {
         return playerRepository.findOne(id);
     }
