@@ -86,6 +86,10 @@ public class PlayerServiceImp implements PlayerService {
             return null;
         }
         Address address = player.getAddress();
+        if (address == null) {
+            address = new Address();
+            player.setAddress(address);
+        }
         if (reqParam.containsKey(KEY_SPONSOR)) {
             Long sponsorId = Long.parseLong(reqParam.get(KEY_SPONSOR));
             if (!sponsorRepository.exists(sponsorId)) {
@@ -93,10 +97,11 @@ public class PlayerServiceImp implements PlayerService {
             }
             Sponsor sponsor = sponsorRepository.findOne(Long.parseLong(reqParam.get(KEY_SPONSOR)));
             updatePlayer(player, address, sponsor, reqParam);
+        } else {
+            updatePlayer(player, address, null, reqParam);
         }
-        updatePlayer(player, address, null, reqParam);
-        return playerRepository.save(player);
 
+        return playerRepository.save(player);
     }
 
     /**

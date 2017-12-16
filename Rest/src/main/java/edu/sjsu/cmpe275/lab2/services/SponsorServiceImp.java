@@ -71,6 +71,10 @@ public class SponsorServiceImp implements SponsorService {
             return null;
         }
         Address address = sponsor.getAddress();
+        if (address == null) {
+            address = new Address();
+            sponsor.setAddress(address);
+        }
         updateSponsor(sponsor, address, reqParam);
         return sponsorRepository.save(sponsor);
     }
